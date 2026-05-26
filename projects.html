@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koen 作品集 — Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg-primary: #0a0a0f;
+      --color-bg-secondary: #12121a;
+      --color-bg-tertiary: #1a1a26;
+      --color-text-primary: #e4e4ef;
+      --color-text-secondary: #9898b0;
+      --color-text-tertiary: #5c5c78;
+      --color-border-default: #1e1e2e;
+      --color-border-subtle: #16161f;
+      --color-border-strong: #2e2e42;
+      --color-accent-default: #818cf8;
+      --color-accent-hover: #6366f1;
+      --color-accent-subtle: rgba(129,140,248,0.06);
+      --color-accent-soft: rgba(129,140,248,0.12);
+      --color-accent-text: #a5b4fc;
+      --color-success: #34d399;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .nav {
+      position: sticky; top: 0; z-index: 1000; height: 64px; display: flex; align-items: center;
+      background: rgba(10, 10, 15, 0.86); backdrop-filter: blur(12px) saturate(180%);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav-logo { font-size: 20px; font-weight: 700; display: flex; align-items: center; }
+    .logo-k { color: var(--color-accent-default); }
+    .logo-rest { color: var(--color-text-primary); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); transition: color 200ms ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--color-accent-text); }
+    .page-hero { padding: 112px 0 56px; border-bottom: 1px solid var(--color-border-subtle); background: radial-gradient(ellipse at top, rgba(129,140,248,0.08), transparent 58%); }
+    .eyebrow { color: var(--color-accent-text); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+    h1 { max-width: 760px; font-size: 42px; line-height: 1.18; font-weight: 700; letter-spacing: 0; margin-bottom: 18px; }
+    .lead { max-width: 760px; color: var(--color-text-secondary); font-size: 17px; }
+    main section { padding: 72px 0; }
+    .section-title { font-size: 28px; font-weight: 650; margin-bottom: 28px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .grid-three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .card {
+      background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 12px; padding: 24px;
+      transition: border-color 200ms ease, transform 200ms ease, background 200ms ease;
+    }
+    .card:hover { border-color: var(--color-border-strong); transform: translateY(-2px); }
+    .card h2, .card h3 { font-size: 19px; line-height: 1.35; margin-bottom: 10px; }
+    .card p { color: var(--color-text-secondary); font-size: 15px; }
+    .muted { color: var(--color-text-tertiary); }
+    .badge-row, .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .badge, .tag {
+      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px;
+      background: var(--color-accent-subtle); color: var(--color-accent-text); font-size: 12px; font-weight: 500;
+    }
+    .tag { background: var(--color-bg-tertiary); color: var(--color-text-secondary); border: 1px solid var(--color-border-default); }
+    .timeline { display: grid; gap: 16px; }
+    .timeline-item { display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: start; }
+    .timeline-year { color: var(--color-accent-text); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 9px 18px; border-radius: 8px;
+      border: 1px solid var(--color-border-default); color: var(--color-text-secondary); font-size: 14px; font-weight: 500;
+      transition: color 200ms ease, border-color 200ms ease, background 200ms ease;
+    }
+    .btn:hover { color: var(--color-text-primary); border-color: var(--color-border-strong); background: var(--color-bg-tertiary); }
+    .btn-primary { border-color: transparent; background: var(--color-accent-default); color: #fff; }
+    .btn-primary:hover { background: var(--color-accent-hover); color: #fff; }
+    .list { display: grid; gap: 14px; color: var(--color-text-secondary); }
+    .list li { margin-left: 20px; }
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .filter-btn { background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); color: var(--color-text-secondary); border-radius: 8px; padding: 8px 14px; cursor: pointer; font: inherit; font-size: 14px; }
+    .filter-btn.active, .filter-btn:hover { color: var(--color-accent-text); border-color: var(--color-accent-default); background: var(--color-accent-subtle); }
+    footer { border-top: 1px solid var(--color-border-subtle); padding: 24px 0; color: var(--color-text-tertiary); font-size: 13px; }
+    footer .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    @media (max-width: 760px) {
+      .nav-links { gap: 14px; overflow-x: auto; }
+      h1 { font-size: 31px; }
+      .page-hero { padding: 88px 0 44px; }
+      .grid, .grid-three { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+      footer .container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo"><span class="logo-k">K</span><span class="logo-rest">oen</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="uses.html">Uses</a></li>
+      </ul>
+    </div>
+  </header>
+  <main>
+    <section class="page-hero"><div class="container"><div class="eyebrow">Projects</div><h1>把想法做成能访问、能维护、能复用的作品。</h1><p class="lead">这里收集 Koen 的代表项目。真实链接仍在补全中，当前页面先承接首页作品卡片并展开项目背景、技术方向和后续待补信息。</p></div></section>
+    <section><div class="container"><h2 class="section-title">代表作品</h2><div class="grid">
+      <article class="card"><span class="badge">开源</span><h2>DevTools Nav</h2><p>面向开发者的工具导航平台，目标是把常用开发工具按场景组织起来，减少重复搜索和收藏夹混乱。</p><div class="tag-row"><span class="tag">HTML</span><span class="tag">Tailwind</span><span class="tag">GitHub Pages</span></div><div class="tag-row"><a class="btn" href="#">GitHub 待补</a><a class="btn" href="#">在线演示待补</a></div></article>
+      <article class="card"><span class="badge">独立产品</span><h2>Koen 工具箱</h2><p>个人品牌工具站，集成 AI 专题和开发者常用入口，是个人 IP 与工具作品之间的流量承接点。</p><div class="tag-row"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">1Panel</span></div><div class="tag-row"><a class="btn btn-primary" href="https://tools.songyuankun.top" target="_blank" rel="noopener">在线访问</a><a class="btn" href="#">GitHub 待补</a></div></article>
+      <article class="card"><span class="badge">全栈项目</span><h2>贵金属监控系统</h2><p>围绕价格监控、数据采集和告警建立的实用系统，适合展示后端、自动化和数据处理能力。</p><div class="tag-row"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">MySQL</span><span class="tag">Playwright</span></div><div class="tag-row"><a class="btn" href="#">GitHub 待补</a><a class="btn" href="#">演示待补</a></div></article>
+      <article class="card"><span class="badge">前端工具</span><h2>AionUi / cc-switch</h2><p>前端组件与开发辅助工具方向的积累，适合后续补充截图、安装方式和使用案例。</p><div class="tag-row"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Component</span></div><div class="tag-row"><a class="btn" href="#">GitHub 待补</a><a class="btn" href="#">文档待补</a></div></article>
+    </div></div></section>
+    <section><div class="container card"><h2>后续补充项</h2><ul class="list"><li>为每个项目补充真实 GitHub 链接、在线地址和截图。</li><li>如果有 Star 数或访问数据，加入项目卡片右上角。</li><li>把项目截图放入独立 assets 目录，避免远程图片失效。</li></ul></div></section>
+  </main>
+  <footer><div class="container"><span>Made with code by Koen</span><span>&copy; 2024-2026</span></div></footer>
+</body>
+</html>
+

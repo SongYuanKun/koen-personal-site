@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koen 在用 — Uses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg-primary: #0a0a0f;
+      --color-bg-secondary: #12121a;
+      --color-bg-tertiary: #1a1a26;
+      --color-text-primary: #e4e4ef;
+      --color-text-secondary: #9898b0;
+      --color-text-tertiary: #5c5c78;
+      --color-border-default: #1e1e2e;
+      --color-border-subtle: #16161f;
+      --color-border-strong: #2e2e42;
+      --color-accent-default: #818cf8;
+      --color-accent-hover: #6366f1;
+      --color-accent-subtle: rgba(129,140,248,0.06);
+      --color-accent-soft: rgba(129,140,248,0.12);
+      --color-accent-text: #a5b4fc;
+      --color-success: #34d399;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .nav {
+      position: sticky; top: 0; z-index: 1000; height: 64px; display: flex; align-items: center;
+      background: rgba(10, 10, 15, 0.86); backdrop-filter: blur(12px) saturate(180%);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav-logo { font-size: 20px; font-weight: 700; display: flex; align-items: center; }
+    .logo-k { color: var(--color-accent-default); }
+    .logo-rest { color: var(--color-text-primary); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); transition: color 200ms ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--color-accent-text); }
+    .page-hero { padding: 112px 0 56px; border-bottom: 1px solid var(--color-border-subtle); background: radial-gradient(ellipse at top, rgba(129,140,248,0.08), transparent 58%); }
+    .eyebrow { color: var(--color-accent-text); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+    h1 { max-width: 760px; font-size: 42px; line-height: 1.18; font-weight: 700; letter-spacing: 0; margin-bottom: 18px; }
+    .lead { max-width: 760px; color: var(--color-text-secondary); font-size: 17px; }
+    main section { padding: 72px 0; }
+    .section-title { font-size: 28px; font-weight: 650; margin-bottom: 28px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .grid-three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .card {
+      background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 12px; padding: 24px;
+      transition: border-color 200ms ease, transform 200ms ease, background 200ms ease;
+    }
+    .card:hover { border-color: var(--color-border-strong); transform: translateY(-2px); }
+    .card h2, .card h3 { font-size: 19px; line-height: 1.35; margin-bottom: 10px; }
+    .card p { color: var(--color-text-secondary); font-size: 15px; }
+    .muted { color: var(--color-text-tertiary); }
+    .badge-row, .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .badge, .tag {
+      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px;
+      background: var(--color-accent-subtle); color: var(--color-accent-text); font-size: 12px; font-weight: 500;
+    }
+    .tag { background: var(--color-bg-tertiary); color: var(--color-text-secondary); border: 1px solid var(--color-border-default); }
+    .timeline { display: grid; gap: 16px; }
+    .timeline-item { display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: start; }
+    .timeline-year { color: var(--color-accent-text); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 9px 18px; border-radius: 8px;
+      border: 1px solid var(--color-border-default); color: var(--color-text-secondary); font-size: 14px; font-weight: 500;
+      transition: color 200ms ease, border-color 200ms ease, background 200ms ease;
+    }
+    .btn:hover { color: var(--color-text-primary); border-color: var(--color-border-strong); background: var(--color-bg-tertiary); }
+    .btn-primary { border-color: transparent; background: var(--color-accent-default); color: #fff; }
+    .btn-primary:hover { background: var(--color-accent-hover); color: #fff; }
+    .list { display: grid; gap: 14px; color: var(--color-text-secondary); }
+    .list li { margin-left: 20px; }
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .filter-btn { background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); color: var(--color-text-secondary); border-radius: 8px; padding: 8px 14px; cursor: pointer; font: inherit; font-size: 14px; }
+    .filter-btn.active, .filter-btn:hover { color: var(--color-accent-text); border-color: var(--color-accent-default); background: var(--color-accent-subtle); }
+    footer { border-top: 1px solid var(--color-border-subtle); padding: 24px 0; color: var(--color-text-tertiary); font-size: 13px; }
+    footer .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    @media (max-width: 760px) {
+      .nav-links { gap: 14px; overflow-x: auto; }
+      h1 { font-size: 31px; }
+      .page-hero { padding: 88px 0 44px; }
+      .grid, .grid-three { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+      footer .container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo"><span class="logo-k">K</span><span class="logo-rest">oen</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="uses.html" class="active">Uses</a></li>
+      </ul>
+    </div>
+  </header>
+  <main>
+    <section class="page-hero"><div class="container"><div class="eyebrow">Uses</div><h1>我日常用来写代码、做内容和维护服务的工具栈。</h1><p class="lead">这页适合和小红书图文联动：每个工具都讲清楚“解决什么问题”，而不是只列名字。</p></div></section>
+    <section><div class="container"><h2 class="section-title">工具清单</h2><div class="grid-three">
+      <article class="card"><span class="badge">编辑器</span><h3>IntelliJ IDEA</h3><p>Java 后端主力 IDE，用于 Spring Boot 项目开发、调试和重构。</p></article>
+      <article class="card"><span class="badge">编辑器</span><h3>VS Code</h3><p>轻量前端、Markdown、脚本和内容仓库维护。</p></article>
+      <article class="card"><span class="badge">终端</span><h3>Linux Shell</h3><p>服务器巡检、部署、日志排查和自动化脚本的基础入口。</p></article>
+      <article class="card"><span class="badge">AI 工具</span><h3>OpenClaw / Codex / Claude CLI</h3><p>用于运维协作、代码开发、内容生成和多 Agent 调度。</p></article>
+      <article class="card"><span class="badge">部署</span><h3>1Panel + OpenResty</h3><p>个人站点和服务入口管理，配合 Docker 降低维护成本。</p></article>
+      <article class="card"><span class="badge">设计</span><h3>Figma / Canva</h3><p>用于封面、图文卡片和视觉规范整理。</p></article>
+      <article class="card"><span class="badge">效率</span><h3>Git / Gitea</h3><p>内容和代码都进仓库，便于 diff、回滚和跨 AI 接手。</p></article>
+      <article class="card"><span class="badge">硬件</span><h3>开发主机</h3><p>硬件配置待 Koen 确认后补充，避免编造型号和参数。</p></article>
+      <article class="card"><span class="badge">内容</span><h3>CSDN / 公众号 / 小红书</h3><p>不同平台承担不同表达角色，配合一鱼多吃降低维护成本。</p></article>
+    </div></div></section>
+  </main>
+  <footer><div class="container"><span>Made with code by Koen</span><span>&copy; 2024-2026</span></div></footer>
+</body>
+</html>
+
