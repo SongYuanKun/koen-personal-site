@@ -82,6 +82,8 @@
     .btn:hover { color: var(--color-text-primary); border-color: var(--color-border-strong); background: var(--color-bg-tertiary); }
     .btn-primary { border-color: transparent; background: var(--color-accent-default); color: #fff; }
     .btn-primary:hover { background: var(--color-accent-hover); color: #fff; }
+    .btn-disabled { cursor: default; color: var(--color-text-tertiary); opacity: 0.72; }
+    .btn-disabled:hover { color: var(--color-text-tertiary); border-color: var(--color-border-default); background: transparent; }
     .list { display: grid; gap: 14px; color: var(--color-text-secondary); }
     .list li { margin-left: 20px; }
     .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
@@ -107,27 +109,26 @@
 <body>
   <header class="nav">
     <div class="container">
-      <a href="index.html" class="nav-logo"><span class="logo-k">K</span><span class="logo-rest">oen</span></a>
+      <a href="/" class="nav-logo"><span class="logo-k">K</span><span class="logo-rest">oen</span></a>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html" class="active">Projects</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="uses.html">Uses</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/projects" class="active">Projects</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/uses">Uses</a></li>
       </ul>
     </div>
   </header>
   <main>
     <section class="page-hero"><div class="container"><div class="eyebrow">Projects</div><h1>把想法做成能访问、能维护、能复用的作品。</h1><p class="lead">这里收集 Koen 的代表项目。真实链接仍在补全中，当前页面先承接首页作品卡片并展开项目背景、技术方向和后续待补信息。</p></div></section>
     <section><div class="container"><h2 class="section-title">代表作品</h2><div class="grid">
-      <article class="card"><span class="badge">开源</span><h2>DevTools Nav</h2><p>面向开发者的工具导航平台，目标是把常用开发工具按场景组织起来，减少重复搜索和收藏夹混乱。</p><div class="tag-row"><span class="tag">HTML</span><span class="tag">Tailwind</span><span class="tag">GitHub Pages</span></div><div class="tag-row"><a class="btn" href="#">GitHub 待补</a><a class="btn" href="#">在线演示待补</a></div></article>
-      <article class="card"><span class="badge">独立产品</span><h2>Koen 工具箱</h2><p>个人品牌工具站，集成 AI 专题和开发者常用入口，是个人 IP 与工具作品之间的流量承接点。</p><div class="tag-row"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">1Panel</span></div><div class="tag-row"><a class="btn btn-primary" href="https://tools.songyuankun.top" target="_blank" rel="noopener">在线访问</a><a class="btn" href="#">GitHub 待补</a></div></article>
-      <article class="card"><span class="badge">全栈项目</span><h2>贵金属监控系统</h2><p>围绕价格监控、数据采集和告警建立的实用系统，适合展示后端、自动化和数据处理能力。</p><div class="tag-row"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">MySQL</span><span class="tag">Playwright</span></div><div class="tag-row"><a class="btn" href="#">GitHub 待补</a><a class="btn" href="#">演示待补</a></div></article>
-      <article class="card"><span class="badge">前端工具</span><h2>AionUi / cc-switch</h2><p>前端组件与开发辅助工具方向的积累，适合后续补充截图、安装方式和使用案例。</p><div class="tag-row"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Component</span></div><div class="tag-row"><a class="btn" href="#">GitHub 待补</a><a class="btn" href="#">文档待补</a></div></article>
+      <article class="card"><span class="badge">开源</span><h2>DevTools Nav</h2><p>面向开发者的工具导航平台，目标是把常用开发工具按场景组织起来，减少重复搜索和收藏夹混乱。</p><div class="tag-row"><span class="tag">HTML</span><span class="tag">Tailwind</span><span class="tag">GitHub Pages</span></div><div class="tag-row"><span class="btn btn-disabled">GitHub 待补</span><span class="btn btn-disabled">在线演示待补</span></div></article>
+      <article class="card"><span class="badge">独立产品</span><h2>Koen 工具箱</h2><p>个人品牌工具站，集成 AI 专题和开发者常用入口，是个人 IP 与工具作品之间的流量承接点。</p><div class="tag-row"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">1Panel</span></div><div class="tag-row"><a class="btn btn-primary" href="https://tools.songyuankun.top" target="_blank" rel="noopener">在线访问</a><span class="btn btn-disabled">GitHub 待补</span></div></article>
+      <article class="card"><span class="badge">全栈项目</span><h2>贵金属监控系统</h2><p>围绕价格监控、数据采集和告警建立的实用系统，适合展示后端、自动化和数据处理能力。</p><div class="tag-row"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">MySQL</span><span class="tag">Playwright</span></div><div class="tag-row"><span class="btn btn-disabled">GitHub 待补</span><span class="btn btn-disabled">演示待补</span></div></article>
+      <article class="card"><span class="badge">前端工具</span><h2>AionUi / cc-switch</h2><p>前端组件与开发辅助工具方向的积累，适合后续补充截图、安装方式和使用案例。</p><div class="tag-row"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Component</span></div><div class="tag-row"><span class="btn btn-disabled">GitHub 待补</span><span class="btn btn-disabled">文档待补</span></div></article>
     </div></div></section>
     <section><div class="container card"><h2>后续补充项</h2><ul class="list"><li>为每个项目补充真实 GitHub 链接、在线地址和截图。</li><li>如果有 Star 数或访问数据，加入项目卡片右上角。</li><li>把项目截图放入独立 assets 目录，避免远程图片失效。</li></ul></div></section>
   </main>
   <footer><div class="container"><span>Made with code by Koen</span><span>&copy; 2024-2026</span></div></footer>
 </body>
 </html>
-

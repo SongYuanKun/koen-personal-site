@@ -331,6 +331,18 @@
       background: var(--color-bg-tertiary);
     }
 
+    .btn-disabled {
+      cursor: default;
+      color: var(--color-text-tertiary);
+      opacity: 0.72;
+    }
+
+    .btn-disabled:hover {
+      color: var(--color-text-tertiary);
+      border-color: var(--color-border-default);
+      background: transparent;
+    }
+
     .hero-scroll {
       position: absolute;
       bottom: 40px;
@@ -846,15 +858,15 @@
   <!-- ===== 1. Nav 导航栏 ===== -->
   <header class="nav" id="nav">
     <div class="container">
-      <a href="index.html" class="nav-logo">
+      <a href="/" class="nav-logo">
         <span class="logo-k">K</span><span class="logo-rest">oen</span>
       </a>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="uses.html">Uses</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/uses">Uses</a></li>
       </ul>
       <a href="https://github.com/SongYuanKun" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -872,11 +884,11 @@
   <!-- 移动端抽屉 -->
   <div class="nav-drawer-overlay" id="nav-overlay"></div>
   <nav class="nav-drawer" id="nav-drawer">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="blog.html">Blog</a>
-    <a href="uses.html">Uses</a>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/projects">Projects</a>
+    <a href="/blog">Blog</a>
+    <a href="/uses">Uses</a>
   </nav>
 
   <main>
@@ -885,8 +897,8 @@
       <h1>我用技术思考，用代码创造</h1>
       <h2>Koen — 7 年 Java 后端 / 源码级探索者 / 独立开发者</h2>
       <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">查看我的作品</a>
-        <a href="#about" class="btn btn-ghost">了解更多</a>
+        <a href="/projects" class="btn btn-primary">查看我的作品</a>
+        <a href="/about" class="btn btn-ghost">了解更多</a>
       </div>
       <div class="hero-scroll">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -947,8 +959,8 @@
               <p class="project-desc">面向开发者的工具导航平台</p>
               <p class="project-tech">HTML / Tailwind / GitHub Pages</p>
               <div class="project-links">
-                <a href="#" class="btn btn-ghost">GitHub</a>
-                <a href="#" class="btn btn-ghost" style="border:none;color:var(--color-accent-text)">在线访问</a>
+                <span class="btn btn-ghost btn-disabled">GitHub 待补</span>
+                <span class="btn btn-ghost btn-disabled" style="border:none">在线访问待补</span>
               </div>
             </div>
           </article>
@@ -961,8 +973,8 @@
               <p class="project-desc">个人品牌工具站，集成 AI 专题</p>
               <p class="project-tech">HTML / CSS / JavaScript</p>
               <div class="project-links">
-                <a href="#" class="btn btn-ghost">GitHub</a>
-                <a href="#" class="btn btn-ghost" style="border:none;color:var(--color-accent-text)">在线访问</a>
+                <span class="btn btn-ghost btn-disabled">GitHub 待补</span>
+                <a href="https://tools.songyuankun.top" target="_blank" rel="noopener" class="btn btn-ghost" style="border:none;color:var(--color-accent-text)">在线访问</a>
               </div>
             </div>
           </article>
@@ -975,8 +987,8 @@
               <p class="project-desc">实时贵金属价格监控与告警</p>
               <p class="project-tech">Python / Flask / MySQL / Playwright</p>
               <div class="project-links">
-                <a href="#" class="btn btn-ghost">GitHub</a>
-                <a href="#" class="btn btn-ghost" style="border:none;color:var(--color-accent-text)">在线访问</a>
+                <span class="btn btn-ghost btn-disabled">GitHub 待补</span>
+                <span class="btn btn-ghost btn-disabled" style="border:none">在线访问待补</span>
               </div>
             </div>
           </article>
@@ -989,8 +1001,8 @@
               <p class="project-desc">前端组件库与开发辅助工具</p>
               <p class="project-tech">React / TypeScript</p>
               <div class="project-links">
-                <a href="#" class="btn btn-ghost">GitHub</a>
-                <a href="#" class="btn btn-ghost" style="border:none;color:var(--color-accent-text)">在线访问</a>
+                <span class="btn btn-ghost btn-disabled">GitHub 待补</span>
+                <span class="btn btn-ghost btn-disabled" style="border:none">在线访问待补</span>
               </div>
             </div>
           </article>
@@ -1059,7 +1071,7 @@
       <div class="container">
         <div class="blog-header">
           <h2 class="section-title">最新文章</h2>
-          <a href="blog.html" class="blog-view-all">查看全部 &rarr;</a>
+          <a href="/blog" class="blog-view-all">查看全部 &rarr;</a>
         </div>
         <div class="blog-grid">
           <article class="blog-card">
