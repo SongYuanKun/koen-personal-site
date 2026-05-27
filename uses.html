@@ -21,7 +21,6 @@
       --color-accent-default: #818cf8;
       --color-accent-hover: #6366f1;
       --color-accent-subtle: rgba(129,140,248,0.06);
-      --color-accent-soft: rgba(129,140,248,0.12);
       --color-accent-text: #a5b4fc;
       --color-success: #34d399;
     }
@@ -29,17 +28,17 @@
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
       font-family: 'Inter', 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
-      background: var(--color-bg-primary);
-      color: var(--color-text-primary);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      background: var(--color-bg-primary); color: var(--color-text-primary);
+      line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* ===== Nav ===== */
     .nav {
       position: sticky; top: 0; z-index: 1000; height: 64px; display: flex; align-items: center;
       background: rgba(10, 10, 15, 0.86); backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
       border-bottom: 1px solid var(--color-border-subtle);
     }
     .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
@@ -49,59 +48,100 @@
     .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
     .nav-links a { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); transition: color 200ms ease; }
     .nav-links a:hover, .nav-links a.active { color: var(--color-accent-text); }
-    .page-hero { padding: 112px 0 56px; border-bottom: 1px solid var(--color-border-subtle); background: radial-gradient(ellipse at top, rgba(129,140,248,0.08), transparent 58%); }
+    .nav-github { display: flex; align-items: center; color: var(--color-text-secondary); transition: color 200ms ease; }
+    .nav-github:hover { color: var(--color-text-primary); }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; justify-content: center; align-items: center;
+      width: 40px; height: 40px; cursor: pointer; background: none; border: none; gap: 5px; padding: 8px;
+    }
+    .nav-hamburger span {
+      display: block; width: 20px; height: 2px;
+      background: var(--color-text-secondary); border-radius: 1px;
+      transition: transform 300ms ease, opacity 200ms ease;
+    }
+    .nav-hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-drawer {
+      display: none; position: fixed; top: 64px; right: 0; bottom: 0; width: 280px;
+      background: var(--color-bg-secondary); border-left: 1px solid var(--color-border-default);
+      z-index: 999; padding: 24px; flex-direction: column; gap: 8px;
+      transform: translateX(100%); transition: transform 300ms ease;
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer a {
+      display: block; padding: 12px 16px; font-size: 15px; font-weight: 500;
+      color: var(--color-text-secondary); border-radius: 8px;
+      transition: color 200ms ease, background 200ms ease;
+    }
+    .nav-drawer a:hover, .nav-drawer a.active { color: var(--color-accent-text); background: var(--color-accent-subtle); }
+    .nav-drawer-overlay {
+      display: none; position: fixed; inset: 0; top: 64px;
+      background: rgba(0,0,0,0.5); z-index: 998; opacity: 0; transition: opacity 300ms ease;
+    }
+    .nav-drawer-overlay.open { opacity: 1; }
+
+    /* ===== Page Hero ===== */
+    .page-hero {
+      padding: 112px 0 56px; border-bottom: 1px solid var(--color-border-subtle);
+      background: radial-gradient(ellipse at top, rgba(129,140,248,0.08), transparent 58%);
+    }
     .eyebrow { color: var(--color-accent-text); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
-    h1 { max-width: 760px; font-size: 42px; line-height: 1.18; font-weight: 700; letter-spacing: 0; margin-bottom: 18px; }
+    h1 { max-width: 760px; font-size: 42px; line-height: 1.18; font-weight: 700; margin-bottom: 18px; }
     .lead { max-width: 760px; color: var(--color-text-secondary); font-size: 17px; }
+
+    /* ===== Layout ===== */
     main section { padding: 72px 0; }
-    .section-title { font-size: 28px; font-weight: 650; margin-bottom: 28px; }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .section-title { font-size: 28px; font-weight: 700; margin-bottom: 28px; }
     .grid-three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-    .card {
-      background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 12px; padding: 24px;
-      transition: border-color 200ms ease, transform 200ms ease, background 200ms ease;
+    .tool-section { margin-bottom: 56px; }
+    .tool-section:last-child { margin-bottom: 0; }
+    .tool-section-title {
+      font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--color-text-tertiary); margin-bottom: 16px;
     }
-    .card:hover { border-color: var(--color-border-strong); transform: translateY(-2px); }
-    .card h2, .card h3 { font-size: 19px; line-height: 1.35; margin-bottom: 10px; }
-    .card p { color: var(--color-text-secondary); font-size: 15px; }
-    .muted { color: var(--color-text-tertiary); }
-    .badge-row, .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .badge, .tag {
-      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px;
-      background: var(--color-accent-subtle); color: var(--color-accent-text); font-size: 12px; font-weight: 500;
+
+    /* ===== Tool Card ===== */
+    .tool-card {
+      background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 12px; padding: 20px;
+      transition: border-color 200ms ease, transform 200ms ease;
     }
-    .tag { background: var(--color-bg-tertiary); color: var(--color-text-secondary); border: 1px solid var(--color-border-default); }
-    .timeline { display: grid; gap: 16px; }
-    .timeline-item { display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: start; }
-    .timeline-year { color: var(--color-accent-text); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 9px 18px; border-radius: 8px;
-      border: 1px solid var(--color-border-default); color: var(--color-text-secondary); font-size: 14px; font-weight: 500;
-      transition: color 200ms ease, border-color 200ms ease, background 200ms ease;
+    .tool-card:hover { border-color: var(--color-border-strong); transform: translateY(-2px); }
+    .tool-name { font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 6px; }
+    .tool-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
+    .tool-badge {
+      display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500;
+      background: var(--color-accent-subtle); color: var(--color-accent-text);
+      margin-bottom: 10px;
     }
-    .btn:hover { color: var(--color-text-primary); border-color: var(--color-border-strong); background: var(--color-bg-tertiary); }
-    .btn-primary { border-color: transparent; background: var(--color-accent-default); color: #fff; }
-    .btn-primary:hover { background: var(--color-accent-hover); color: #fff; }
-    .list { display: grid; gap: 14px; color: var(--color-text-secondary); }
-    .list li { margin-left: 20px; }
-    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-    .filter-btn { background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); color: var(--color-text-secondary); border-radius: 8px; padding: 8px 14px; cursor: pointer; font: inherit; font-size: 14px; }
-    .filter-btn.active, .filter-btn:hover { color: var(--color-accent-text); border-color: var(--color-accent-default); background: var(--color-accent-subtle); }
+
+    /* ===== Footer ===== */
     footer { border-top: 1px solid var(--color-border-subtle); padding: 24px 0; color: var(--color-text-tertiary); font-size: 13px; }
     footer .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 640px) {
+      .nav-links, .nav-github { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-drawer { display: flex; }
+      .nav-drawer-overlay { display: block; }
+    }
+    @media (max-width: 900px) {
+      .grid-three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .grid-three { grid-template-columns: 1fr; }
+    }
     @media (max-width: 760px) {
-      .nav-links { gap: 14px; overflow-x: auto; }
       h1 { font-size: 31px; }
       .page-hero { padding: 88px 0 44px; }
-      .grid, .grid-three { grid-template-columns: 1fr; }
-      .timeline-item { grid-template-columns: 1fr; gap: 6px; }
       footer .container { flex-direction: column; align-items: flex-start; }
     }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       html { scroll-behavior: auto; }
     }
-
   </style>
 </head>
 <body>
@@ -115,22 +155,182 @@
         <li><a href="/blog">Blog</a></li>
         <li><a href="/uses" class="active">Uses</a></li>
       </ul>
+      <a href="https://github.com/SongYuanKun" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+      </a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="打开菜单">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
+
+  <div class="nav-drawer-overlay" id="nav-overlay"></div>
+  <nav class="nav-drawer" id="nav-drawer">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/projects">Projects</a>
+    <a href="/blog">Blog</a>
+    <a href="/uses" class="active">Uses</a>
+  </nav>
+
   <main>
-    <section class="page-hero"><div class="container"><div class="eyebrow">Uses</div><h1>我日常用来写代码、做内容和维护服务的工具栈。</h1><p class="lead">这页适合和小红书图文联动：每个工具都讲清楚“解决什么问题”，而不是只列名字。</p></div></section>
-    <section><div class="container"><h2 class="section-title">工具清单</h2><div class="grid-three">
-      <article class="card"><span class="badge">编辑器</span><h3>IntelliJ IDEA</h3><p>Java 后端主力 IDE，用于 Spring Boot 项目开发、调试和重构。</p></article>
-      <article class="card"><span class="badge">编辑器</span><h3>VS Code</h3><p>轻量前端、Markdown、脚本和内容仓库维护。</p></article>
-      <article class="card"><span class="badge">终端</span><h3>Linux Shell</h3><p>服务器巡检、部署、日志排查和自动化脚本的基础入口。</p></article>
-      <article class="card"><span class="badge">AI 工具</span><h3>OpenClaw / Codex / Claude CLI</h3><p>用于运维协作、代码开发、内容生成和多 Agent 调度。</p></article>
-      <article class="card"><span class="badge">部署</span><h3>1Panel + OpenResty</h3><p>个人站点和服务入口管理，配合 Docker 降低维护成本。</p></article>
-      <article class="card"><span class="badge">设计</span><h3>Figma / Canva</h3><p>用于封面、图文卡片和视觉规范整理。</p></article>
-      <article class="card"><span class="badge">效率</span><h3>Git / Gitea</h3><p>内容和代码都进仓库，便于 diff、回滚和跨 AI 接手。</p></article>
-      <article class="card"><span class="badge">硬件</span><h3>开发主机</h3><p>硬件配置待 Koen 确认后补充，避免编造型号和参数。</p></article>
-      <article class="card"><span class="badge">内容</span><h3>CSDN / 公众号 / 小红书</h3><p>不同平台承担不同表达角色，配合一鱼多吃降低维护成本。</p></article>
-    </div></div></section>
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">Uses</div>
+        <h1>我日常用来写代码、做内容和维护服务的工具栈。</h1>
+        <p class="lead">每个工具都讲清楚"解决什么问题"，而不是只列名字。偏向轻量、低维护成本、真实解决问题的选择。</p>
+      </div>
+    </section>
+
+    <!-- 工具清单 -->
+    <section>
+      <div class="container">
+
+        <!-- 编辑器 & IDE -->
+        <div class="tool-section">
+          <div class="tool-section-title">编辑器 & IDE</div>
+          <div class="grid-three">
+            <div class="tool-card">
+              <div class="tool-badge">主力</div>
+              <div class="tool-name">IntelliJ IDEA</div>
+              <div class="tool-desc">Java 后端主力 IDE。用于 Spring Boot 项目开发、远程调试和大规模重构，代码分析和跳转能力无可替代。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-badge">日常</div>
+              <div class="tool-name">VS Code</div>
+              <div class="tool-desc">前端、Markdown、脚本和内容仓库维护。插件生态灵活，启动快，适合轻量编辑和跨语言场景。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-badge">AI 辅助</div>
+              <div class="tool-name">Claude Code CLI</div>
+              <div class="tool-desc">终端内 AI 编程助手，用于代码生成、重构建议、文档整理和多 Agent 任务编排，深度整合到日常工作流。</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI 工具 -->
+        <div class="tool-section">
+          <div class="tool-section-title">AI 工具</div>
+          <div class="grid-three">
+            <div class="tool-card">
+              <div class="tool-badge">对话 & 推理</div>
+              <div class="tool-name">Claude / GPT</div>
+              <div class="tool-desc">复杂推理、代码审查和长文档分析的主力 AI。Claude 在结构化输出和源码分析场景表现突出。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-badge">内容创作</div>
+              <div class="tool-name">Qwen / GLM</div>
+              <div class="tool-desc">中文内容创作和本地私有部署场景。国产模型对中文语境理解更准确，成本控制上有明显优势。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-badge">图像</div>
+              <div class="tool-name">Midjourney / DALL·E</div>
+              <div class="tool-desc">封面图和配图生成。文章封面遵循品牌暗色规范（#0f172a 背景 + Indigo 主色）统一视觉语言。</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 部署 & 运维 -->
+        <div class="tool-section">
+          <div class="tool-section-title">部署 & 运维</div>
+          <div class="grid-three">
+            <div class="tool-card">
+              <div class="tool-badge">服务管理</div>
+              <div class="tool-name">1Panel + OpenResty</div>
+              <div class="tool-desc">个人站点和服务入口的统一管理面板。配合 Docker 容器化部署，降低运维复杂度，支持通配证书和反向代理配置。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-badge">容器化</div>
+              <div class="tool-name">Docker / Compose</div>
+              <div class="tool-desc">所有自建服务优先容器化，环境隔离、升级回滚和迁移成本显著降低。TrendRadar 等项目完全基于 Compose 编排。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-badge">云服务</div>
+              <div class="tool-name">阿里云 ECS</div>
+              <div class="tool-desc">主力服务器。搭配 ufw 防火墙、frpc 内网穿透和 1Panel 管理面板构成完整的个人云基础设施。</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 设计 & 内容 -->
+        <div class="tool-section">
+          <div class="tool-section-title">设计 & 内容</div>
+          <div class="grid-three">
+            <div class="tool-card">
+              <div class="tool-badge">视觉设计</div>
+              <div class="tool-name">Figma</div>
+              <div class="tool-desc">品牌视觉规范整理和封面设计。用于维护设计令牌（颜色、字体、间距）和输出图文卡片模板。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-badge">快速制图</div>
+              <div class="tool-name">Canva</div>
+              <div class="tool-desc">小红书图文和公众号封面的快速输出工具。Figma 用于设计规范，Canva 用于批量生产执行。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-badge">API 调试</div>
+              <div class="tool-name">Postman / Apifox</div>
+              <div class="tool-desc">后端接口调试和文档维护。Apifox 在中文文档和团队协作场景体验更好，个人项目两者都用。</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 效率 & 版本管理 -->
+        <div class="tool-section">
+          <div class="tool-section-title">效率 & 版本管理</div>
+          <div class="grid-three">
+            <div class="tool-card">
+              <div class="tool-badge">版本控制</div>
+              <div class="tool-name">Git / GitHub</div>
+              <div class="tool-desc">代码和内容都进仓库，便于 diff、回滚和跨设备同步。内容仓库也用 Git 管理，让知识沉淀可追溯。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-badge">终端</div>
+              <div class="tool-name">Linux Shell / tmux</div>
+              <div class="tool-desc">服务器巡检、部署、日志排查和自动化脚本的基础入口。tmux 用于长时间运行任务的会话保持。</div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-badge">自动化</div>
+              <div class="tool-name">GitHub Actions</div>
+              <div class="tool-desc">CI/CD 和内容发布自动化。用于代码检查、静态站构建和定时任务触发，降低手动操作成本。</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
   </main>
-  <footer><div class="container"><span>Made with code by Koen</span><span>&copy; 2024-2026</span></div></footer>
+
+  <footer>
+    <div class="container">
+      <span>Made with code by Koen</span>
+      <span>&copy; 2024-2026</span>
+    </div>
+  </footer>
+
+  <script>
+    var hamburger = document.getElementById('nav-hamburger');
+    var drawer = document.getElementById('nav-drawer');
+    var overlay = document.getElementById('nav-overlay');
+    function toggleDrawer() {
+      hamburger.classList.toggle('active');
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('open');
+      document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+    }
+    function closeDrawer() {
+      hamburger.classList.remove('active');
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    hamburger.addEventListener('click', toggleDrawer);
+    overlay.addEventListener('click', closeDrawer);
+    drawer.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', closeDrawer);
+    });
+  </script>
 </body>
 </html>

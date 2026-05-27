@@ -21,7 +21,6 @@
       --color-accent-default: #818cf8;
       --color-accent-hover: #6366f1;
       --color-accent-subtle: rgba(129,140,248,0.06);
-      --color-accent-soft: rgba(129,140,248,0.12);
       --color-accent-text: #a5b4fc;
       --color-success: #34d399;
     }
@@ -29,17 +28,17 @@
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
       font-family: 'Inter', 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
-      background: var(--color-bg-primary);
-      color: var(--color-text-primary);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      background: var(--color-bg-primary); color: var(--color-text-primary);
+      line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* ===== Nav ===== */
     .nav {
       position: sticky; top: 0; z-index: 1000; height: 64px; display: flex; align-items: center;
       background: rgba(10, 10, 15, 0.86); backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
       border-bottom: 1px solid var(--color-border-subtle);
     }
     .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
@@ -49,59 +48,117 @@
     .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
     .nav-links a { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); transition: color 200ms ease; }
     .nav-links a:hover, .nav-links a.active { color: var(--color-accent-text); }
-    .page-hero { padding: 112px 0 56px; border-bottom: 1px solid var(--color-border-subtle); background: radial-gradient(ellipse at top, rgba(129,140,248,0.08), transparent 58%); }
+    .nav-github { display: flex; align-items: center; color: var(--color-text-secondary); transition: color 200ms ease; }
+    .nav-github:hover { color: var(--color-text-primary); }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; justify-content: center; align-items: center;
+      width: 40px; height: 40px; cursor: pointer; background: none; border: none; gap: 5px; padding: 8px;
+    }
+    .nav-hamburger span {
+      display: block; width: 20px; height: 2px;
+      background: var(--color-text-secondary); border-radius: 1px;
+      transition: transform 300ms ease, opacity 200ms ease;
+    }
+    .nav-hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-drawer {
+      display: none; position: fixed; top: 64px; right: 0; bottom: 0; width: 280px;
+      background: var(--color-bg-secondary); border-left: 1px solid var(--color-border-default);
+      z-index: 999; padding: 24px; flex-direction: column; gap: 8px;
+      transform: translateX(100%); transition: transform 300ms ease;
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer a {
+      display: block; padding: 12px 16px; font-size: 15px; font-weight: 500;
+      color: var(--color-text-secondary); border-radius: 8px;
+      transition: color 200ms ease, background 200ms ease;
+    }
+    .nav-drawer a:hover, .nav-drawer a.active { color: var(--color-accent-text); background: var(--color-accent-subtle); }
+    .nav-drawer-overlay {
+      display: none; position: fixed; inset: 0; top: 64px;
+      background: rgba(0,0,0,0.5); z-index: 998; opacity: 0; transition: opacity 300ms ease;
+    }
+    .nav-drawer-overlay.open { opacity: 1; }
+
+    /* ===== Page Hero ===== */
+    .page-hero {
+      padding: 112px 0 56px; border-bottom: 1px solid var(--color-border-subtle);
+      background: radial-gradient(ellipse at top, rgba(129,140,248,0.08), transparent 58%);
+    }
     .eyebrow { color: var(--color-accent-text); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
-    h1 { max-width: 760px; font-size: 42px; line-height: 1.18; font-weight: 700; letter-spacing: 0; margin-bottom: 18px; }
+    h1 { max-width: 760px; font-size: 42px; line-height: 1.18; font-weight: 700; margin-bottom: 18px; }
     .lead { max-width: 760px; color: var(--color-text-secondary); font-size: 17px; }
+
+    /* ===== Layout ===== */
     main section { padding: 72px 0; }
-    .section-title { font-size: 28px; font-weight: 650; margin-bottom: 28px; }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-    .grid-three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-    .card {
-      background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 12px; padding: 24px;
-      transition: border-color 200ms ease, transform 200ms ease, background 200ms ease;
-    }
-    .card:hover { border-color: var(--color-border-strong); transform: translateY(-2px); }
-    .card h2, .card h3 { font-size: 19px; line-height: 1.35; margin-bottom: 10px; }
-    .card p { color: var(--color-text-secondary); font-size: 15px; }
-    .muted { color: var(--color-text-tertiary); }
-    .badge-row, .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .badge, .tag {
-      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px;
-      background: var(--color-accent-subtle); color: var(--color-accent-text); font-size: 12px; font-weight: 500;
-    }
-    .tag { background: var(--color-bg-tertiary); color: var(--color-text-secondary); border: 1px solid var(--color-border-default); }
-    .timeline { display: grid; gap: 16px; }
-    .timeline-item { display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: start; }
-    .timeline-year { color: var(--color-accent-text); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 9px 18px; border-radius: 8px;
-      border: 1px solid var(--color-border-default); color: var(--color-text-secondary); font-size: 14px; font-weight: 500;
+    .section-title { font-size: 28px; font-weight: 700; margin-bottom: 28px; }
+
+    /* ===== Filter Bar ===== */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .filter-btn {
+      background: var(--color-bg-secondary); border: 1px solid var(--color-border-default);
+      color: var(--color-text-secondary); border-radius: 8px; padding: 8px 16px;
+      cursor: pointer; font: inherit; font-size: 14px;
       transition: color 200ms ease, border-color 200ms ease, background 200ms ease;
     }
-    .btn:hover { color: var(--color-text-primary); border-color: var(--color-border-strong); background: var(--color-bg-tertiary); }
-    .btn-primary { border-color: transparent; background: var(--color-accent-default); color: #fff; }
-    .btn-primary:hover { background: var(--color-accent-hover); color: #fff; }
-    .list { display: grid; gap: 14px; color: var(--color-text-secondary); }
-    .list li { margin-left: 20px; }
-    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-    .filter-btn { background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); color: var(--color-text-secondary); border-radius: 8px; padding: 8px 14px; cursor: pointer; font: inherit; font-size: 14px; }
     .filter-btn.active, .filter-btn:hover { color: var(--color-accent-text); border-color: var(--color-accent-default); background: var(--color-accent-subtle); }
+
+    /* ===== Article Grid ===== */
+    .article-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+
+    /* ===== Article Card ===== */
+    .article-card {
+      background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: 12px;
+      padding: 24px; display: block;
+      transition: border-color 200ms ease, transform 200ms ease;
+    }
+    .article-card:hover { border-color: var(--color-border-strong); transform: translateY(-2px); }
+    .platform-badge {
+      display: inline-block; margin-bottom: 12px; padding: 3px 8px; border-radius: 4px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.02em;
+    }
+    .platform-csdn       { background: rgba(248,113,113,0.12); color: #f87171; }
+    .platform-xiaohongshu{ background: rgba(244,192,209,0.12); color: #f471b5; }
+    .platform-wechat     { background: rgba(52,211,153,0.12);  color: #34d399; }
+    .platform-juejin     { background: rgba(96,165,250,0.12);  color: #60a5fa; }
+    .article-title {
+      font-size: 17px; font-weight: 600; color: var(--color-text-primary); line-height: 1.45;
+      margin-bottom: 10px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .article-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 14px; }
+    .article-meta { display: flex; align-items: center; gap: 12px; }
+    .article-date { font-size: 12px; color: var(--color-text-tertiary); }
+    .article-read {
+      font-size: 12px; color: var(--color-accent-text); margin-left: auto;
+      opacity: 0; transition: opacity 200ms ease;
+    }
+    .article-card:hover .article-read { opacity: 1; }
+
+    /* ===== Footer ===== */
     footer { border-top: 1px solid var(--color-border-subtle); padding: 24px 0; color: var(--color-text-tertiary); font-size: 13px; }
     footer .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 640px) {
+      .nav-links, .nav-github { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-drawer { display: flex; }
+      .nav-drawer-overlay { display: block; }
+      .article-grid { grid-template-columns: 1fr; }
+    }
     @media (max-width: 760px) {
-      .nav-links { gap: 14px; overflow-x: auto; }
       h1 { font-size: 31px; }
       .page-hero { padding: 88px 0 44px; }
-      .grid, .grid-three { grid-template-columns: 1fr; }
-      .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+      .article-grid { grid-template-columns: 1fr; }
       footer .container { flex-direction: column; align-items: flex-start; }
     }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       html { scroll-behavior: auto; }
     }
-
   </style>
 </head>
 <body>
@@ -115,28 +172,185 @@
         <li><a href="/blog" class="active">Blog</a></li>
         <li><a href="/uses">Uses</a></li>
       </ul>
+      <a href="https://github.com/SongYuanKun" target="_blank" rel="noopener" class="nav-github" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+      </a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="打开菜单">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
+
+  <div class="nav-drawer-overlay" id="nav-overlay"></div>
+  <nav class="nav-drawer" id="nav-drawer">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/projects">Projects</a>
+    <a href="/blog" class="active">Blog</a>
+    <a href="/uses">Uses</a>
+  </nav>
+
   <main>
-    <section class="page-hero"><div class="container"><div class="eyebrow">Blog</div><h1>技术文章、AI 观察和独立开发记录。</h1><p class="lead">当前为静态文章列表。长期方案建议接入 CSDN RSS，经 GitHub Actions 定时生成 blog-data.json，再由静态页面渲染。</p></div></section>
-    <section><div class="container"><div class="filter-bar"><button class="filter-btn active" data-filter="all">All</button><button class="filter-btn" data-filter="csdn">CSDN</button><button class="filter-btn" data-filter="juejin">掘金</button><button class="filter-btn" data-filter="wechat">公众号</button><button class="filter-btn" data-filter="xiaohongshu">小红书</button></div><div class="grid" id="article-list">
-      <article class="card article" data-platform="csdn"><span class="badge">CSDN</span><h2>GLM-5.1 涨价 80%：国产大模型告别白菜价</h2><p>围绕大模型价格变化，分析开发者该如何重新评估成本、性能和供应商锁定。</p><p class="muted">2026.05</p></article>
-      <article class="card article" data-platform="xiaohongshu"><span class="badge">小红书</span><h2>5 个让编码效率翻倍的 AI 工具</h2><p>轻量工具种草方向，适合转成图文卡片和短内容。</p><p class="muted">2026.05</p></article>
-      <article class="card article" data-platform="csdn"><span class="badge">CSDN</span><h2>LongAdder 源码逐行解读：Cell 分片策略</h2><p>源码级技术文章方向，用一个并发组件讲清楚工程取舍。</p><p class="muted">2026.05</p></article>
-      <article class="card article" data-platform="wechat"><span class="badge">公众号</span><h2>我为什么从后端转向独立开发</h2><p>个人 IP 故事线内容，发布前需要 Koen 确认真实表达。</p><p class="muted">2026.05</p></article>
-    </div></div></section>
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">Blog</div>
+        <h1>技术文章、AI 观察和独立开发记录。</h1>
+        <p class="lead">跨平台发布内容，涵盖 Java 源码解读、AI 工具评测、独立开发故事。多平台同步发布，同一主题针对不同读者调性各有侧重。</p>
+      </div>
+    </section>
+
+    <!-- 文章列表 -->
+    <section>
+      <div class="container">
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">全部</button>
+          <button class="filter-btn" data-filter="csdn">CSDN</button>
+          <button class="filter-btn" data-filter="wechat">公众号</button>
+          <button class="filter-btn" data-filter="xiaohongshu">小红书</button>
+          <button class="filter-btn" data-filter="juejin">掘金 / 知乎</button>
+        </div>
+
+        <div class="article-grid" id="article-list">
+
+          <!-- W1 - 1 -->
+          <a class="article-card" href="https://blog.csdn.net/syk123839070" target="_blank" rel="noopener" data-platform="csdn">
+            <span class="platform-badge platform-csdn">CSDN</span>
+            <h2 class="article-title">GLM-5.1 涨价 80%：国产大模型告别白菜价</h2>
+            <p class="article-desc">GLM-5.1 价格上调 80%，国产大模型正式结束"白菜价"时代。从商业化逻辑、成本测算和供应商选择三个维度，分析开发者该如何重新规划 AI 调用策略。</p>
+            <div class="article-meta">
+              <span class="article-date">2026.05</span>
+              <span class="article-read">阅读全文 →</span>
+            </div>
+          </a>
+
+          <!-- W1 - 2 -->
+          <a class="article-card" href="https://blog.csdn.net/syk123839070" target="_blank" rel="noopener" data-platform="csdn">
+            <span class="platform-badge platform-csdn">CSDN</span>
+            <h2 class="article-title">LongAdder 源码逐行解读：Cell 分片策略为什么快</h2>
+            <p class="article-desc">从 AtomicLong 的热点竞争问题切入，逐行拆解 LongAdder 的 Cell 数组分片、伪共享防护和扩容策略，搞清楚它比 AtomicLong 快在哪里。</p>
+            <div class="article-meta">
+              <span class="article-date">2026.05</span>
+              <span class="article-read">阅读全文 →</span>
+            </div>
+          </a>
+
+          <!-- W1 - 3 -->
+          <a class="article-card" href="#" data-platform="xiaohongshu">
+            <span class="platform-badge platform-xiaohongshu">小红书</span>
+            <h2 class="article-title">5 个让编码效率翻倍的 AI 工具（2026版）</h2>
+            <p class="article-desc">实测 5 款 2026 年最值得用的 AI 编程工具，附上我的真实工作流。不堆参数，只讲哪个场景用哪个，立刻可以上手。</p>
+            <div class="article-meta">
+              <span class="article-date">2026.05</span>
+              <span class="article-read">查看图文 →</span>
+            </div>
+          </a>
+
+          <!-- W1 - 4 -->
+          <a class="article-card" href="#" data-platform="wechat">
+            <span class="platform-badge platform-wechat">公众号</span>
+            <h2 class="article-title">我为什么从后端转向独立开发</h2>
+            <p class="article-desc">7 年后端工程师转向独立开发的心路历程。不是鸡汤，是真实的动机、踩坑和现阶段的收获，以及我判断这条路是否适合你的标准。</p>
+            <div class="article-meta">
+              <span class="article-date">2026.05</span>
+              <span class="article-read">阅读全文 →</span>
+            </div>
+          </a>
+
+          <!-- W2 - 1 -->
+          <a class="article-card" href="https://blog.csdn.net/syk123839070" target="_blank" rel="noopener" data-platform="csdn">
+            <span class="platform-badge platform-csdn">CSDN</span>
+            <h2 class="article-title">LangGraph 实战：用状态机构建生产级 AI Agent</h2>
+            <p class="article-desc">用 LangGraph 的有向图模型替代线性链，搭建一个支持分支、重试和状态持久化的生产级 Agent。含完整代码和真实踩坑记录。</p>
+            <div class="article-meta">
+              <span class="article-date">2026.05</span>
+              <span class="article-read">阅读全文 →</span>
+            </div>
+          </a>
+
+          <!-- W2 - 2 -->
+          <a class="article-card" href="#" data-platform="xiaohongshu">
+            <span class="platform-badge platform-xiaohongshu">小红书</span>
+            <h2 class="article-title">程序员下班后都在搞什么副业？</h2>
+            <p class="article-desc">问了 20 位程序员朋友，整理出 6 种常见的下班后副业路径。哪条最容易起量、哪条最适合内向型程序员，数据说话。</p>
+            <div class="article-meta">
+              <span class="article-date">2026.05</span>
+              <span class="article-read">查看图文 →</span>
+            </div>
+          </a>
+
+          <!-- W2 - 3 -->
+          <a class="article-card" href="https://blog.csdn.net/syk123839070" target="_blank" rel="noopener" data-platform="csdn">
+            <span class="platform-badge platform-csdn">CSDN</span>
+            <h2 class="article-title">MyBatis 源码：一条 SQL 是怎么变成 ResultSet 的</h2>
+            <p class="article-desc">从 SqlSession.selectList() 出发，沿着 Executor → StatementHandler → ResultSetHandler 完整走一遍 MyBatis 的 SQL 执行链路，配合源码和时序图讲清楚每个扩展点。</p>
+            <div class="article-meta">
+              <span class="article-date">2026.05</span>
+              <span class="article-read">阅读全文 →</span>
+            </div>
+          </a>
+
+          <!-- W2 - 4 -->
+          <a class="article-card" href="https://juejin.cn/user/syk123839070" target="_blank" rel="noopener" data-platform="juejin">
+            <span class="platform-badge platform-juejin">掘金</span>
+            <h2 class="article-title">把 Claude、GPT-5、Gemini 放进一个路由器</h2>
+            <p class="article-desc">用 LiteLLM 构建统一 LLM 网关，按任务类型路由到最合适的模型。分享我的 Agent 工作流从单模型切换到多模型路由的完整改造过程和成本对比。</p>
+            <div class="article-meta">
+              <span class="article-date">2026.05</span>
+              <span class="article-read">阅读全文 →</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
   </main>
-  <footer><div class="container"><span>Made with code by Koen</span><span>&copy; 2024-2026</span></div></footer>
+
+  <footer>
+    <div class="container">
+      <span>Made with code by Koen</span>
+      <span>&copy; 2024-2026</span>
+    </div>
+  </footer>
+
   <script>
-    var buttons = document.querySelectorAll('.filter-btn');
-    var articles = document.querySelectorAll('.article');
-    buttons.forEach(function(button) {
-      button.addEventListener('click', function() {
-        var filter = button.getAttribute('data-filter');
-        buttons.forEach(function(item) { item.classList.remove('active'); });
-        button.classList.add('active');
+    /* ===== 移动端汉堡菜单 ===== */
+    var hamburger = document.getElementById('nav-hamburger');
+    var drawer = document.getElementById('nav-drawer');
+    var overlay = document.getElementById('nav-overlay');
+    function toggleDrawer() {
+      hamburger.classList.toggle('active');
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('open');
+      document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+    }
+    function closeDrawer() {
+      hamburger.classList.remove('active');
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    hamburger.addEventListener('click', toggleDrawer);
+    overlay.addEventListener('click', closeDrawer);
+    drawer.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', closeDrawer);
+    });
+
+    /* ===== 文章平台过滤 ===== */
+    var filterBtns = document.querySelectorAll('.filter-btn');
+    var articles = document.querySelectorAll('.article-card');
+    filterBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var filter = btn.getAttribute('data-filter');
+        filterBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
         articles.forEach(function(article) {
-          var matched = filter === 'all' || article.getAttribute('data-platform') === filter;
+          var platform = article.getAttribute('data-platform');
+          // 掘金/知乎 filter 匹配 juejin 和 zhihu
+          var matched = filter === 'all' || platform === filter ||
+            (filter === 'juejin' && (platform === 'juejin' || platform === 'zhihu'));
           article.style.display = matched ? '' : 'none';
         });
       });
